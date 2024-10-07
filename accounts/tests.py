@@ -44,7 +44,7 @@ class SignupTests(TestCase):
     
     def test_signup_template(self):
         self.assertTemplateUsed(self.response, 'registration/signup.html')
-        self.assertContains(self.response, 'Sign Up')
+        self.assertContains(self.response, 'Signup')
     
     def test_signup_form(self):
         form = self.response.context.get('form')
