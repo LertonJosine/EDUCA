@@ -34,7 +34,7 @@
                 <a href="{% url 'about' %}">About</a>
               </li>
               <li>
-                <a href="#">Courses</a>
+                <a href="{% url 'all_courses' %}">Courses</a>
               </li>
               <li>
                 <a href="{% url 'trainers' %}">Trainers</a>
@@ -72,7 +72,7 @@
           </nav>
           <!-- .navbar -->
 
-          <a href="courses.html" class="get-started-btn">Get Started</a>
+          <a href="{% url 'all_courses' %}" class="get-started-btn">Get Started</a>
         </div>
       </header>
       <!-- End Header -->
