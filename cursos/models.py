@@ -8,7 +8,7 @@ class Curso(models.Model):
     resume = models.TextField()
     price = models.DecimalField(max_digits=5, decimal_places=2)
     sits = models.IntegerField()
-    cover = models.ImageField(upload_to='media/', default="course-1.jpg")
+    cover = models.ImageField(upload_to='media/')
 
     
     def get_absolute_url(self):

@@ -1,9 +1,9 @@
 from django.test import TestCase
-from django.test import SimpleTestCase
 from django.urls import resolve, reverse
 from .models import Curso
 from django.contrib.auth import get_user_model
 from .views import ListCoursesView, CourseDetailsPageView
+
 
 class ListCoursesPageTest(TestCase):
     def setUp(self):    
@@ -40,10 +40,6 @@ class CourseDetailsPageTest(TestCase):
         
         self.response = self.client.get(url)
         
-       
-        
-    
-    
     def test_course_details_page_name(self):
         self.assertEqual(self.response.status_code, 200)
     
@@ -58,12 +54,12 @@ class CourseDetailsPageTest(TestCase):
     
 class CourseCreationTest(TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_user(
-            username='test',
-            email='test@gmail.com'
-        )
+        self.superuser = get_user_model().objects.create_superuser(username='test', email='test@gmail.com', password='test123')
+        
+        self.user = get_user_model().objects.create_user(username='test_normal', email='test_normal@gmail.com', password='test123')
+        
         self.course = Curso.objects.create(
-            trainer=self.user,
+            trainer=self.superuser,
             name='test course',
             resume='test course creation',
             cover='./media/course-1.jpg',
@@ -72,8 +68,20 @@ class CourseCreationTest(TestCase):
             
         )
         
+        url = reverse('create_course')
+        self.client.login(username=self.superuser.username, password='test123')
+        self.response = self.client.get(url)
+    
+    def test_create_course_page_name(self):
+        self.assertEqual(self.response.status_code, 200)
+    
+    def test_create_course_page_forbid_normal_user(self):
+        self.client.login(username=self.user, password='test123')
+        response = self.client.get(reverse('create_course'))
+        self.assertEqual(response.status_code, 403)
+                    
     def test_course_creation(self):
-        self.assertEqual(self.course.trainer, self.user)
+        self.assertEqual(self.course.trainer, self.superuser)
         self.assertEqual(self.course.name, 'test course')
         self.assertEqual(self.course.resume, 'test course creation')
         self.assertEqual(self.course.price, 20.00)
