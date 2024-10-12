@@ -75,14 +75,7 @@ WSGI_APPLICATION = 'educa.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': env('DJANGO_DB_ENGINE'),
-        'NAME': env('DJANGO_DB_NAME'),
-        'USER': env('DJANGO_DB_USER'),
-        'HOST': env('DJANGO_DB_HOST'),
-        'PASSWORD': env('DJANGO_DB_PASSWORD'),
-        'PORT': env.int('DJANGO_DB_PORT')
-    }
+    'default': env.js_db_url("DATABASE_URL")
 }
 
 
