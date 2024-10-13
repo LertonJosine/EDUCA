@@ -4,7 +4,7 @@ WORKDIR /Educa
 
 COPY requirements.txt .
 
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
@@ -14,4 +14,4 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 
 EXPOSE 8000
 
-CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "Educa.wsgi:application"]
