@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'educa.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': env.dj_db_url("DATABASE_URL")
+    'default': env.dj_db_url("DATABASE_URL", default="postgresql://educa_data_base_user:T6mCCN9rgZKaHdnnpv6SKtoBzBoh1XAy@dpg-cs5328o8fa8c73aerj2g-a/educa_data_base")
 }
 
 

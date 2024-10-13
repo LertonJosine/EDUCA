@@ -14,4 +14,4 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 
 EXPOSE 8000
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "educa.wsgi:application"]
+CMD ["sh", "-c", "python manage.py migrate && gunicorn --bind 0.0.0.0:8000 Educa.wsgi:application"]
