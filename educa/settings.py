@@ -138,4 +138,9 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env("DJANGO_EMAIL_HOST")
+EMAIL_PORT = env.int("DJANGO_EMAIL_PORT")
+EMAIL_USE_TLS = env.bool("DJANGO_EMAIL_USE_TLS")
+EMAIL_HOST_PASSWORD = env("DJANGO_EMAIL_HOST_PASSWORD")
+EMAIL_HOST_USER = env("DJANGO_EMAIL_HOST_USER")
